@@ -18,12 +18,9 @@ else
 fi
 echo '+++'
 
-set -v
-node --version
-npm --version
 git --version
+set -v
 git clone $GIT_URL --branch $GIT_BRANCH --single-branch --depth 1 node-app
-
 cd node-app
 export NODE_ENV=production
 npm install
