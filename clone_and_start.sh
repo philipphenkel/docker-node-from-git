@@ -16,7 +16,7 @@ fi
 
 GIT_BRANCH=${GIT_BRANCH:-master}
 
-echo '+++ GIT_URL            ' $GIT_URL
+echo '+++ GIT_REPOSITORY     ' $GIT_REPOSITORY
 echo '+++ GIT_BRANCH         ' $GIT_BRANCH
 
 if [ ! -z "$GIT_SSH_KEY_BASE64" ]
@@ -32,9 +32,16 @@ else
 fi
 echo '+++'
 
+if [ -z "$GIT_REPOSITORY" ]
+then
+  echo 'fatal: environment variable GIT_REPOSITORY is not set' 1>&2
+  exit 1
+fi
+
+
 git --version
 set -v
-git clone $GIT_URL --branch $GIT_BRANCH --single-branch --depth 1 node-app
+git clone $GIT_REPOSITORY --branch $GIT_BRANCH --single-branch --depth 1 node-app
 cd node-app
 export NODE_ENV=production
 npm install
