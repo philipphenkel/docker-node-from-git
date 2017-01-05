@@ -17,12 +17,11 @@ That's all. At container start the git repository is cloned, `npm install` and `
 
 Environment Variables
 ---------------------
-
-`GIT_REPOSITORY` - The URL of the git repository, e.g. `GIT_REPOSITORY=https://github.com/henkel/node-hello-world.git`
-
-`GIT_BRANCH` - Specifies the branch to be checked out. `master` by default.
-
-`GIT_SSH_KEY_BASE64` - Base64 encoded private SSH key for private read access to the git repository.
+Variable | Description
+-------- | -----------
+`GIT_REPOSITORY` | The URL of the git repository, e.g. `GIT_REPOSITORY=https://github.com/henkel/node-hello-world.git`
+`GIT_BRANCH` | Specifies the branch to be checked out. `master` by default.
+`GIT_SSH_KEY_BASE64` | Base64 encoded private SSH key for private read access to the git repository.
 
 
 License
