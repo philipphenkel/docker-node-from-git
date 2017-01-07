@@ -7,12 +7,13 @@ It's a simple solution to dockerize your Node service or application. Both publi
 Quick Start
 -----------
 
-Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on port 8080. The Node server is available at `https://github.com/henkel/node-hello-world.git`
+Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on port 8080. The source code of the server is available at `https://github.com/henkel/node-hello-world.git`
 
 ```console
 docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/henkel/node-hello-world.git henkel/docker-node-from-git:latest
 ```
-That's all. At container start the git repository is cloned, `npm install` and `npm start` are executed with `NODE_ENV=production`.
+
+That's all. At each start of container the specified git repository will be cloned. Afterwards `npm install` and `npm start` will be executed with `NODE_ENV=production`.
 
 
 Environment Variables
