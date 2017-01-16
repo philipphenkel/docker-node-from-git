@@ -1,4 +1,4 @@
-FROM node:7-alpine
+FROM node:alpine
 
 RUN apk add --update bash git openssh-client && rm -rf /var/cache/apk/*
 
