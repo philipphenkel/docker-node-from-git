@@ -13,7 +13,7 @@ Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on por
 docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/philipphenkel/node-hello-world.git henkel/docker-node-from-git:latest
 ```
 
-That's all. At each start of container the specified git repository will be cloned. Afterwards `npm install` and `npm start` will be executed with `NODE_ENV=production`.
+That's all. At each start of container the specified git repository will be cloned. Afterwards `yarn install` and `yarn start` will be executed with `NODE_ENV=production`.
 
 
 Environment Variables
