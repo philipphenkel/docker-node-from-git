@@ -48,4 +48,5 @@ git clone $GIT_REPOSITORY --branch $GIT_BRANCH --single-branch --depth 1 node-ap
 cd node-app
 export NODE_ENV=production
 yarn install
-yarn start
+
+exec "$@"
