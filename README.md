@@ -16,6 +16,27 @@ docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/philipph
 That's it. At each start of container the specified git repository will be cloned. Afterwards `yarn install` and `yarn start` will be executed with `NODE_ENV=production`.
 
 
+Customized Command
+------------------
+
+`yarn start` is the image's default command and can be overwritten with your custom bash command sequence.  
+
+The following docker stack file installs, builds and serves an app:
+
+```console
+talk-about-code:
+  command: 'bash -c "yarn build && serve -s build"'
+  environment:
+    - 'GIT_REPOSITORY=git@github.com:philipphenkel/talk-about-code.git'
+    - GIT_SSH_KEY_BASE64=USEYOUROWNKEY
+  expose:
+    - '5000'
+  image: 'henkel/docker-node-from-git:latest'
+  labels:
+    traefik.enable: 'true'
+    traefik.frontend.rule: 'Host:talkaboutcode.org,www.talkaboutcode.org'
+```
+
 Environment Variables
 ---------------------
 Variable | Description
