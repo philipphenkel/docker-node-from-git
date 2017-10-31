@@ -1,11 +1,9 @@
-node-from-git
-=============
+# node-from-git
 
 node-from-git is a Docker image that clones a Node.js project from git, installs and starts it.
 It's a simple solution to dockerize your Node service or application. Both public and private git repositories are supported.
 
-Quick Start
------------
+## Quick Start
 
 Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on port 8080. The source code of the server is available at `https://github.com/philipphenkel/node-hello-world.git`. Now pass the repository URL as environment variable as follows:
 
@@ -16,8 +14,7 @@ docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/philipph
 That's it. At each start of container the specified git repository will be cloned. Afterwards `yarn install` and `yarn start` will be executed with `NODE_ENV=production`.
 
 
-Customized Command
-------------------
+## Customized Command
 
 `yarn start` is the image's default command and can be overwritten with your custom bash command sequence.  
 
@@ -37,8 +34,8 @@ talk-about-code:
     traefik.frontend.rule: 'Host:talkaboutcode.org,www.talkaboutcode.org'
 ```
 
-Environment Variables
----------------------
+## Environment Variables
+
 Variable | Description
 -------- | -----------
 `GIT_REPOSITORY` | The URL of the git repository, e.g. `GIT_REPOSITORY=https://github.com/philipphenkel/node-hello-world.git`
@@ -46,8 +43,7 @@ Variable | Description
 `GIT_SSH_KEY_BASE64` | Base64 encoded private SSH key for private read access to the git repository.
 
 
-License
--------
+## License
 
 Copyright (C) 2017 Philipp Henkel
 
