@@ -5,7 +5,7 @@ RUN yarn global add serve
 
 USER node
 WORKDIR /home/node
-COPY clone_and_start.sh /home/node
+COPY clone_and_install.sh /home/node
 
-ENTRYPOINT [ "./clone_and_start.sh" ]
+ENTRYPOINT [ "./clone_and_install.sh" ]
 CMD [ "yarn", "start" ]
