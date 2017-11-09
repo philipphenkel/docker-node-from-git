@@ -24,6 +24,7 @@ The following docker stack file installs, builds and serves an app:
 talk-about-code:
   command: 'bash -c "yarn build && serve -s build"'
   environment:
+    - GIT_BRANCH=v1.0.1
     - 'GIT_REPOSITORY=git@github.com:philipphenkel/talk-about-code.git'
     - GIT_SSH_KEY_BASE64=USEYOUROWNKEY
   expose:
@@ -39,7 +40,7 @@ talk-about-code:
 Variable | Description
 -------- | -----------
 `GIT_REPOSITORY` | The URL of the git repository, e.g. `GIT_REPOSITORY=https://github.com/philipphenkel/node-hello-world.git`
-`GIT_BRANCH` | Specifies the branch to be checked out. `master` by default.
+`GIT_BRANCH` | Specifies the branch or the tag to be checked out. Is `master` by default.
 `GIT_SSH_KEY_BASE64` | Base64 encoded private SSH key for private read access to the git repository.
 
 
