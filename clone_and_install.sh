@@ -49,4 +49,4 @@ cd node-app
 export NODE_ENV=production
 yarn install
 
-exec "$@"
+exec /bin/bash -c "$@"
