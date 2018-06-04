@@ -5,7 +5,7 @@ It's a simple solution to dockerize your Node service or application. Both publi
 
 ## Quick Start
 
-Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on port 8080. The source code of the server is available at `https://github.com/philipphenkel/node-hello-world.git`. Now pass the repository URL as environment variable as follows:
+Let's dockerize a small Node.js HTTP server that responds "Hello, world!" on port 8080. The source code of the server is available at `https://github.com/philipphenkel/node-hello-world.git`. Now pass the repository URL as an environment variable to the container as follows:
 
 ```console
 docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/philipphenkel/node-hello-world.git henkel/docker-node-from-git:latest
@@ -14,25 +14,38 @@ docker run --rm -i -t -p 8080:8080 -e GIT_REPOSITORY=https://github.com/philipph
 That's it. At each start of container the specified git repository will be cloned. Afterwards `yarn install` and `yarn start` will be executed with `NODE_ENV=production`.
 
 
-## Customized Command
+## Customized Start Command
 
 `yarn start` is the image's default command and can be overwritten with your custom bash command sequence.  
 
-The following docker stack file installs, builds and serves an app:
+The following Kubernetes yaml file installs, builds and serves an app using `yarn build && serve -s build`:
 
-```console
-talk-about-code:
-  command: 'bash -c "yarn build && serve -s build"'
-  environment:
-    - GIT_BRANCH=v1.0.1
-    - 'GIT_REPOSITORY=git@github.com:philipphenkel/talk-about-code.git'
-    - GIT_SSH_KEY_BASE64=USEYOUROWNKEY
-  expose:
-    - '5000'
-  image: 'henkel/docker-node-from-git:latest'
-  labels:
-    traefik.enable: 'true'
-    traefik.frontend.rule: 'Host:talkaboutcode.org,www.talkaboutcode.org'
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: talk-about-code
+spec:
+  selector:
+    matchLabels:
+      app: talk-about-code
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: talk-about-code
+    spec:
+      containers:
+        - name: talk-about-code
+          image: henkel/docker-node-from-git:latest
+          ports:
+          - containerPort: 5000
+          args: ["yarn build && serve -s build"]
+          env:
+          - name: GIT_REPOSITORY
+            value: "git@github.com:philipphenkel/talk-about-code.git"
+          - name: GIT_BRANCH
+            value: master
 ```
 
 ## Environment Variables
@@ -46,6 +59,6 @@ Variable | Description
 
 ## License
 
-Copyright (C) 2017 Philipp Henkel
+Copyright (C) 2017-2018 Philipp Henkel
 
 Licensed under the MIT License (MIT). See LICENSE file for more details.
